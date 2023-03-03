@@ -12,3 +12,11 @@ html {
   background-color: rgb(33, 31, 30);
   color: rgb(255, 255, 255);
 }
+
+.modal-content {
+  width: 750px !important;
+}
+
+.card.mb-3 {
+  width: 700px !important;
+}

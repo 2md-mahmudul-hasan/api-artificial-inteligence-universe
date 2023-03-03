@@ -65,12 +65,56 @@ const image = singleApi.image_link[0]?singleApi.image_link[0]:singleApi.image_li
 const input_examples = singleApi.input_output_examples[0].input;
 const output_examples = singleApi.input_output_examples[0].output;
 
+const dataNotFound = {
+  noINtegratin:"no integration",
+}
+
 console.log(image)
 
+if(singleApi.integrations===null){
+  singleApi.integrations === "data not found"
+}
+
+document.getElementById('card-Body').innerHTML = `
+<h5 class="card-text">${singleApi.description}</h5>
+  <div class="d-flex align-items-center">
+    <div> 
+      <p  class="px-2 text-success"> ${singleApi.pricing[0].plan}/<br> ${singleApi.pricing[0].price}</p>
+    </div>
+    <div class="mx-2"> 
+      <p class="px-2 text-danger"> ${singleApi.pricing[1].plan}/<br> ${singleApi.pricing[1].price}  </p>
+    </div>
+    <div> 
+      <p class="px-2 text-warning"> ${singleApi.pricing[2].plan}/ <br> ${singleApi.pricing[2].price}  </p>
+    </div>
+  </div>
+  <div class="d-flex align-items-center justify-content-around">
+    <div> 
+      <h6>Features</h6>
+      <ul>
+      <li>${singleApi.features["1"].feature_name}</li>
+      <li>${singleApi.features["2"].feature_name}</li>
+      <li>${singleApi.features["3"].feature_name}</li>
+      </ul>
+    </div>
+    <div> 
+      <h6>Integrations</h6>
+      <li>${singleApi.integrations[0]}</li>
+      <li>${singleApi.integrations[1]?singleApi.integrations[1]:dataNotFound.noINtegratin}</li>
+      <li>${singleApi.integrations[2]?singleApi.integrations[1]:dataNotFound.noINtegratin}</li>
+      <ul>
+      </ul>
+    </div>
+  </div>
+
+
+
+
+`
 document.getElementById('modal-image').innerHTML =`<img src=${image} class="img-fluid rounded-start" alt="">
-    <div class="py-4">
-        <p>${input_examples}<p>
-        <p>${output_examples}<p>
+    <div class="py-4 text-center">
+        <h5>${input_examples}</h5>
+        <p>${output_examples.slice(0,50)}<p>
     </div>
   
 `
