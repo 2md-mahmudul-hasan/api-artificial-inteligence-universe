@@ -32,7 +32,7 @@ const loadAiUniverseData=(apidata)=>{
                         <span> ${api.published_in} </span>
                       </div>
                 
-                      <button type="button" class="btn modal-btn" data-bs-toggle="modal" data-bs-target="#aiModalLauncher">
+                      <button onClick="loadSingleApi('${api.id}')" type="button" class="btn modal-btn" data-bs-toggle="modal" data-bs-target="#aiModalLauncher">
                         <span  style="font-size: 1.5em; color: Tomato;">
                         <i class="fa-solid fa-arrow-right"></i>
                         </span>
@@ -44,6 +44,27 @@ const loadAiUniverseData=(apidata)=>{
       aiUniverseContainer.appendChild(div)
   })
 console.log(apidata)
+}
+
+
+
+
+
+// load single data for modal 
+const loadSingleApi=async(apiId)=>{
+  const url = `https://openapi.programming-hero.com/api/ai/tool/${apiId}`;
+  const res = await fetch(url);
+  const data = await res.json();
+  singleApiData(data.data)
+}
+
+// dynamic api data for display with modal
+const singleApiData=(singleApi)=>{
+console.log(singleApi)
+const image = singleApi.image_link[0]?singleApi.image_link[0]:singleApi.image_link[1]
+console.log(image)
+
+document.getElementById('modal-image').innerHTML =`<img src=${image} class="img-fluid rounded-start" alt="">`
 }
 
 //load api
