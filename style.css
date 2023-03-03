@@ -20,3 +20,24 @@ html {
 .card.mb-3 {
   width: 700px !important;
 }
+
+/* close btn */
+.modal-header {
+  position: relative;
+}
+
+.modal-header .btn-close {
+  position: absolute;
+  right: -20px;
+  top: -20px;
+  padding: 20px;
+  border-radius: 50px;
+  background-color: red;
+  color: aliceblue;
+}
+
+.btn-close {
+  background-image: url("https://flaticons.net/icon.php?slug_category=mobile-application&slug_icon=close");
+}
+
+/* close btn style end */

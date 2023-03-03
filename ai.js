@@ -65,11 +65,10 @@ const image = singleApi.image_link[0]?singleApi.image_link[0]:singleApi.image_li
 const input_examples = singleApi.input_output_examples[0].input;
 const output_examples = singleApi.input_output_examples[0].output;
 
+// if integration value is null 
 const dataNotFound = {
   noINtegratin:"no integration",
 }
-
-console.log(image)
 
 if(singleApi.integrations===null){
   singleApi.integrations === "data not found"
@@ -101,7 +100,7 @@ document.getElementById('card-Body').innerHTML = `
       <h6>Integrations</h6>
       <li>${singleApi.integrations[0]}</li>
       <li>${singleApi.integrations[1]?singleApi.integrations[1]:dataNotFound.noINtegratin}</li>
-      <li>${singleApi.integrations[2]?singleApi.integrations[1]:dataNotFound.noINtegratin}</li>
+      <li>${singleApi.integrations[2]?singleApi.integrations[2]:dataNotFound.noINtegratin}</li>
       <ul>
       </ul>
     </div>
