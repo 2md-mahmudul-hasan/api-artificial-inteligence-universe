@@ -41,3 +41,17 @@ html {
 }
 
 /* close btn style end */
+
+#modal-image {
+  position: relative;
+}
+
+.accuracy {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 10px 20px;
+  background-color: red;
+  color: #fff;
+  border-radius: 5px;
+}

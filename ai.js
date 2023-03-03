@@ -16,12 +16,16 @@ const aiUniverse=async()=>{
   loadAiUniverseData(data.data.tools)
 }
 
+
 // api data for display with card
 const loadAiUniverseData=(apidata)=>{
-  const aiUniverseContainer = document.getElementById('ai-universe-container');
-  // slice six data
-  apidata = apidata.slice(0, 6)
 
+
+  const aiUniverseContainer = document.getElementById('ai-universe-container');
+
+  
+
+  // apidata =apidata.slice(0, 6)
 //display cards
   apidata.forEach(api=>{
     const div = document.createElement('div');
@@ -48,7 +52,7 @@ const loadAiUniverseData=(apidata)=>{
                         <i class="fa-solid fa-arrow-right"></i>
                         </span>
                       </button>
-                      
+
                     </div>
                   </div>
                   `
@@ -56,8 +60,6 @@ const loadAiUniverseData=(apidata)=>{
   })
   spinnerLoader(false)
 }
-
-
 
 
 
@@ -75,6 +77,7 @@ console.log(singleApi)
 const image = singleApi.image_link[0]?singleApi.image_link[0]:singleApi.image_link[1]
 const input_examples = singleApi.input_output_examples[0].input;
 const output_examples = singleApi.input_output_examples[0].output;
+const accuracy = singleApi.accuracy.score?singleApi.accuracy.score:("accuracy not found");
 
 // if integration value is null 
 const dataNotFound = {
@@ -114,16 +117,16 @@ document.getElementById('card-Body').innerHTML = `
   </div>
 
 `
-document.getElementById('modal-image').innerHTML =`<img src=${image} class="img-fluid rounded-start" alt="">
-    <div class="py-4 text-center">
+document.getElementById('modal-image').innerHTML =
+  `<img src=${image} class="img-fluid rounded-start" alt="">
+  <p class="accuracy">${accuracy*100?accuracy*100 +'%accuracy':"accuracy not found"}</p>
+  <div class="py-4 text-center">
         <h5>${input_examples}</h5>
         <p>${output_examples}<p>
     </div>
   
 `
 }
-
-
 
 //load api
 aiUniverse();
