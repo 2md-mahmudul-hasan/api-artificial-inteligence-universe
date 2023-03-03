@@ -11,7 +11,7 @@ const loadAiUniverseData=(apidata)=>{
   const aiUniverseContainer = document.getElementById('ai-universe-container');
 
   // slice six data
-  apidata = apidata.slice(0, 6)
+  // apidata = apidata.slice(0, 6)
   apidata.forEach(api=>{
     const div = document.createElement('div');
     div.classList.add('col-md-4')
@@ -62,9 +62,18 @@ const loadSingleApi=async(apiId)=>{
 const singleApiData=(singleApi)=>{
 console.log(singleApi)
 const image = singleApi.image_link[0]?singleApi.image_link[0]:singleApi.image_link[1]
+const input_examples = singleApi.input_output_examples[0].input;
+const output_examples = singleApi.input_output_examples[0].output;
+
 console.log(image)
 
-document.getElementById('modal-image').innerHTML =`<img src=${image} class="img-fluid rounded-start" alt="">`
+document.getElementById('modal-image').innerHTML =`<img src=${image} class="img-fluid rounded-start" alt="">
+    <div class="py-4">
+        <p>${input_examples}<p>
+        <p>${output_examples}<p>
+    </div>
+  
+`
 }
 
 //load api
