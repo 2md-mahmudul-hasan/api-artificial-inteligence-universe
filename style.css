@@ -5,3 +5,10 @@ body,
 html {
   font-family: 'Work Sans', sans-serif;
 }
+
+/* modal-btn */
+.modal-btn:hover {
+  transition: all 1s;
+  background-color: rgb(33, 31, 30);
+  color: rgb(255, 255, 255);
+}

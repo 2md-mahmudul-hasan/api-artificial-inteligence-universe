@@ -32,8 +32,8 @@ const loadAiUniverseData=(apidata)=>{
                         <span> ${api.published_in} </span>
                       </div>
                 
-                      <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#aiModalLauncher">
-                        <span style="font-size: 1.5em; color: Tomato;">
+                      <button type="button" class="btn modal-btn" data-bs-toggle="modal" data-bs-target="#aiModalLauncher">
+                        <span  style="font-size: 1.5em; color: Tomato;">
                         <i class="fa-solid fa-arrow-right"></i>
                         </span>
                         
