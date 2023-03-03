@@ -1,5 +1,15 @@
+//spinner loader 
+const spinnerLoader = (isLoading)=>{
+  if(isLoading){
+    document.getElementById('spinner-area').classList.remove('d-none')
+   }else{
+    document.getElementById('spinner-area').classList.add('d-none')
+  }
+}
+
 // fetch data
 const aiUniverse=async()=>{
+  spinnerLoader(true)
   const url = `https://openapi.programming-hero.com/api/ai/tools`;
   const res = await fetch(url);
   const data = await res.json();
@@ -9,9 +19,10 @@ const aiUniverse=async()=>{
 // api data for display with card
 const loadAiUniverseData=(apidata)=>{
   const aiUniverseContainer = document.getElementById('ai-universe-container');
-
   // slice six data
-  // apidata = apidata.slice(0, 6)
+  apidata = apidata.slice(0, 6)
+
+//display cards
   apidata.forEach(api=>{
     const div = document.createElement('div');
     div.classList.add('col-md-4')
@@ -36,14 +47,14 @@ const loadAiUniverseData=(apidata)=>{
                         <span  style="font-size: 1.5em; color: Tomato;">
                         <i class="fa-solid fa-arrow-right"></i>
                         </span>
-                        
                       </button>
+                      
                     </div>
                   </div>
                   `
       aiUniverseContainer.appendChild(div)
   })
-console.log(apidata)
+  spinnerLoader(false)
 }
 
 
@@ -68,10 +79,6 @@ const output_examples = singleApi.input_output_examples[0].output;
 // if integration value is null 
 const dataNotFound = {
   noINtegratin:"no integration",
-}
-
-if(singleApi.integrations===null){
-  singleApi.integrations === "data not found"
 }
 
 document.getElementById('card-Body').innerHTML = `
@@ -106,18 +113,17 @@ document.getElementById('card-Body').innerHTML = `
     </div>
   </div>
 
-
-
-
 `
 document.getElementById('modal-image').innerHTML =`<img src=${image} class="img-fluid rounded-start" alt="">
     <div class="py-4 text-center">
         <h5>${input_examples}</h5>
-        <p>${output_examples.slice(0,50)}<p>
+        <p>${output_examples}<p>
     </div>
   
 `
 }
+
+
 
 //load api
 aiUniverse();
