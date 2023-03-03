@@ -1,1 +1,50 @@
-console.log('ply ai ')
+// fetch data
+const aiUniverse=async()=>{
+  const url = `https://openapi.programming-hero.com/api/ai/tools`;
+  const res = await fetch(url);
+  const data = await res.json();
+  loadAiUniverseData(data.data.tools)
+}
+
+// api data for display with card
+const loadAiUniverseData=(apidata)=>{
+  const aiUniverseContainer = document.getElementById('ai-universe-container');
+
+  // slice six data
+  apidata = apidata.slice(0, 6)
+  apidata.forEach(api=>{
+    const div = document.createElement('div');
+    div.classList.add('col-md-4')
+    div.innerHTML = `
+                  <div class="card p-2">
+                  <img class="card-img-top image-fluid" src="${api.image}" alt="Card image cap">
+                  <div class="card-body">
+                  <h3 class="card-title">Features</h3>
+                  </div>
+                  <ol type="1">
+                    <li>${api.features[0]}</li>
+                    <li>${api.features[1]}</li>
+                    <li>${api.features[2]}</li>
+                  </ol>
+                  <div class=" card-body d-flex justify-content-between align-items-center">
+                  <div>
+                    <h5>Card link</h5>
+                    <span> date </span>
+                  </div>
+            
+                  <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                  <span style="font-size: 1.5em; color: Tomato;">
+                  <i class="fa-solid fa-arrow-right"></i>
+                </span>
+                  
+                </button>
+                  </div>
+                  </div>
+                  `
+      aiUniverseContainer.appendChild(div)
+  })
+console.log(apidata)
+}
+
+//load api
+aiUniverse();
