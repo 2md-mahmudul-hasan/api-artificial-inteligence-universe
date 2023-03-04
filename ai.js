@@ -19,15 +19,25 @@ const aiUniverse=async()=>{
 
 // api data for display with card
 const loadAiUniverseData=(apidata)=>{
-
-
   const aiUniverseContainer = document.getElementById('ai-universe-container');
+  // sorting:
+   document.getElementById('short-data').addEventListener('click', function(){
+    const arr1 = apidata.map(obj => {
+      return {...obj, published_in: new Date(obj.published_in)};
+    });
+    arr1.sort(
+      (objA, objB) => new Date(objA.published_in.getTime()) - Number(objB.published_in.getTime()),
+    );
+   })
+ 
 
   
 
   // apidata =apidata.slice(0, 6)
 //display cards
-  apidata.forEach(api=>{
+apidata.forEach(api=>{
+
+
     const div = document.createElement('div');
     div.classList.add('col-md-4')
     div.innerHTML = `
@@ -75,9 +85,13 @@ const loadSingleApi=async(apiId)=>{
 const singleApiData=(singleApi)=>{
 console.log(singleApi)
 const image = singleApi.image_link[0]?singleApi.image_link[0]:singleApi.image_link[1]
-const input_examples = singleApi.input_output_examples[0].input;
-const output_examples = singleApi.input_output_examples[0].output;
+const input_examples = singleApi.input_output_examples?singleApi.input_output_examples[0].input:"not found";
+//const input_examples = singleApi.input_output_examples[0].input;
+//const output_examples = singleApi.input_output_examples[0].output;
+const output_examples = singleApi.input_output_examples?singleApi.input_output_examples[0].output:"not found";
 const accuracy = singleApi.accuracy.score?singleApi.accuracy.score:("accuracy not found");
+
+
 
 // if integration value is null 
 const dataNotFound = {
@@ -88,13 +102,13 @@ document.getElementById('card-Body').innerHTML = `
 <h5 class="card-text">${singleApi.description}</h5>
   <div class="d-flex align-items-center">
     <div> 
-      <p  class="px-2 text-success"> ${singleApi.pricing[0].plan}/<br> ${singleApi.pricing[0].price}</p>
+      <p  class="px-2 text-success"> ${singleApi.pricing?singleApi.pricing[0].plan:'not found'}/<br> ${singleApi.pricing?singleApi.pricing[0].price:"no found"}</p>
     </div>
     <div class="mx-2"> 
-      <p class="px-2 text-danger"> ${singleApi.pricing[1].plan}/<br> ${singleApi.pricing[1].price}  </p>
+      <p class="px-2 text-danger"> ${singleApi.pricing?singleApi.pricing[1].plan:"not found"}/<br> ${singleApi.pricing?singleApi.pricing[1].price:'not found'}  </p>
     </div>
     <div> 
-      <p class="px-2 text-warning"> ${singleApi.pricing[2].plan}/ <br> ${singleApi.pricing[2].price}  </p>
+      <p class="px-2 text-warning"> ${singleApi.pricing?singleApi.pricing[2].plan:"not found"}/ <br> ${singleApi.pricing?singleApi.pricing[2].price:"not found"}  </p>
     </div>
   </div>
   <div class="d-flex align-items-center justify-content-around">
@@ -108,9 +122,9 @@ document.getElementById('card-Body').innerHTML = `
     </div>
     <div> 
       <h6>Integrations</h6>
-      <li>${singleApi.integrations[0]}</li>
-      <li>${singleApi.integrations[1]?singleApi.integrations[1]:dataNotFound.noINtegratin}</li>
-      <li>${singleApi.integrations[2]?singleApi.integrations[2]:dataNotFound.noINtegratin}</li>
+      <li>${singleApi.integrations?singleApi.integrations[0]:dataNotFound.noINtegratin}</li>
+      <li>${singleApi.integrations?singleApi.integrations[1]:dataNotFound.noINtegratin}</li>
+      <li>${singleApi.integrations?singleApi.integrations[2]:dataNotFound.noINtegratin}</li>
       <ul>
       </ul>
     </div>
@@ -126,6 +140,11 @@ document.getElementById('modal-image').innerHTML =
     </div>
   
 `
+}
+
+// date
+const shortFunction=()=>{
+
 }
 
 //load api
