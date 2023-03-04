@@ -8,20 +8,21 @@ const spinnerLoader = (isLoading)=>{
 }
 
 // fetch data
-const aiUniverse=async()=>{
+const aiUniverse=async(dataLimit)=>{
   spinnerLoader(true)
   const url = `https://openapi.programming-hero.com/api/ai/tools`;
   const res = await fetch(url);
   const data = await res.json();
-  loadAiUniverseData(data.data.tools)
+  loadAiUniverseData(data.data.tools,dataLimit)
 }
 
 
 //disply sohow all button
-const loadAiUniverseData=(apidata)=>{
+const loadAiUniverseData=(apidata, dataLimit)=>{
   const aiUniverseContainer = document.getElementById('ai-universe-container');
+  aiUniverseContainer.innerHTML = ''
   const showAll = document.getElementById('show-more-area')
-  if(apidata.length>6){
+  if(dataLimit && apidata.length>6){
     apidata=apidata.slice(0, 6);
     showAll.classList.remove('d-none');
   }else{
@@ -134,10 +135,17 @@ document.getElementById('modal-image').innerHTML =
 `
 }
 
+
+
   //show all data by click ing button
-  document.getElementById('show-more-btn').addEventListener('click', function(){
-    aiUniverse()
-    document.getElementById('show-more-btn').classList.add('d-none')
-  })
+      const processApi=(dataLimit)=>{
+        aiUniverse(dataLimit)
+      }
+    document.getElementById('show-more-btn').addEventListener('click', function(){
+      processApi()
+      document.getElementById('show-more-btn').classList.add('d-none')
+    })
+
+
 //load api
-aiUniverse();
+aiUniverse(dataLimit=6);
