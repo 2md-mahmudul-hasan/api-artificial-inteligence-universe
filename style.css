@@ -55,3 +55,21 @@ html {
   color: #fff;
   border-radius: 5px;
 }
+
+/* responsive css */
+/* // Small devices (landscape phones, 576px and up) */
+@media (max-width: 576px) {
+  img.img-fluid.rounded-start {
+    width: 350px;
+  }
+
+  .modal-content {
+    padding: 5px;
+    margin: 2px;
+    width: 400px !important;
+  }
+
+  .card.mb-3 {
+    width: 350px !important;
+  }
+}

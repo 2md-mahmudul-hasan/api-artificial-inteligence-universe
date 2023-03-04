@@ -131,7 +131,6 @@ document.getElementById('modal-image').innerHTML =
         <h5>${input_examples}</h5>
         <p>${output_examples}<p>
     </div>
-  
 `
 }
 
