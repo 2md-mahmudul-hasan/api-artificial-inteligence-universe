@@ -48,7 +48,8 @@ apidata.forEach(api=>{
                     <div class=" card-body d-flex justify-content-between align-items-center">
                       <div>
                         <h5>${api.name}</h5>
-                        <span> ${api.published_in} </span>
+                        <span><i class="fa fa-calendar" aria-hidden="true"></i>
+ ${api.published_in} </span>
                       </div>
                 
                       <button onClick="loadSingleApi('${api.id}')" type="button" class="btn modal-btn" data-bs-toggle="modal" data-bs-target="#aiModalLauncher">
@@ -83,14 +84,19 @@ const input_examples = singleApi.input_output_examples?singleApi.input_output_ex
 //const input_examples = singleApi.input_output_examples[0].input;
 //const output_examples = singleApi.input_output_examples[0].output;
 const output_examples = singleApi.input_output_examples?singleApi.input_output_examples[0].output:"not found";
-const accuracy = singleApi.accuracy.score?singleApi.accuracy.score:("accuracy not found");
+const accuracy = singleApi.accuracy.score;
 
+// const integrationData = 
 
-
+if(singleApi.integrations===null){
+  singleApi.integrations = 'no'
+}
 // if integration value is null 
 const dataNotFound = {
-  noINtegratin:"no integration",
+  noINtegratin:"integration data not found",
 }
+
+
 
 document.getElementById('card-Body').innerHTML = `
 <h5 class="card-text">${singleApi.description}</h5>
@@ -117,17 +123,17 @@ document.getElementById('card-Body').innerHTML = `
     <div> 
       <h6>Integrations</h6>
       <li>${singleApi.integrations?singleApi.integrations[0]:dataNotFound.noINtegratin}</li>
-      <li>${singleApi.integrations?singleApi.integrations[1]:dataNotFound.noINtegratin}</li>
-      <li>${singleApi.integrations?singleApi.integrations[2]:dataNotFound.noINtegratin}</li>
+      <li>${singleApi.integrations[1]?singleApi.integrations[1]:dataNotFound.noINtegratin}</li>
+      <li>${singleApi.integrations[2]?singleApi.integrations[2]:dataNotFound.noINtegratin}</li>
       <ul>
       </ul>
     </div>
   </div>
-
 `
+
 document.getElementById('modal-image').innerHTML =
-  `<img src=${image} class="img-fluid rounded-start" alt="">
-  <p class="accuracy">${accuracy*100?accuracy*100 +'%accuracy':"accuracy not found"}</p>
+  `  <img src=${image} class="img-fluid rounded-start" alt="">
+  <p id="accuracyId" class="accuracy">${accuracy*100?(accuracy*100 +'%accuracy'):'accuracy data not set'}</p>
   <div class="py-4 text-center">
         <h5>${input_examples}</h5>
         <p>${output_examples}<p>
