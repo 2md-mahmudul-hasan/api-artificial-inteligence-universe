@@ -17,27 +17,20 @@ const aiUniverse=async()=>{
 }
 
 
-// api data for display with card
+//disply sohow all button
 const loadAiUniverseData=(apidata)=>{
   const aiUniverseContainer = document.getElementById('ai-universe-container');
-  // sorting:
-   document.getElementById('short-data').addEventListener('click', function(){
-    const arr1 = apidata.map(obj => {
-      return {...obj, published_in: new Date(obj.published_in)};
-    });
-    arr1.sort(
-      (objA, objB) => new Date(objA.published_in.getTime()) - Number(objB.published_in.getTime()),
-    );
-   })
- 
+  const showAll = document.getElementById('show-more-area')
+  if(apidata.length>6){
+    apidata=apidata.slice(0, 6);
+    showAll.classList.remove('d-none');
+  }else{
+    showAll.classList.add('d-none');
+  }
 
-  
 
-  // apidata =apidata.slice(0, 6)
 //display cards
 apidata.forEach(api=>{
-
-
     const div = document.createElement('div');
     div.classList.add('col-md-4')
     div.innerHTML = `
@@ -142,10 +135,10 @@ document.getElementById('modal-image').innerHTML =
 `
 }
 
-// date
-const shortFunction=()=>{
-
-}
-
+  //show all data by click ing button
+  document.getElementById('show-more-btn').addEventListener('click', function(){
+    aiUniverse()
+    document.getElementById('show-more-btn').classList.add('d-none')
+  })
 //load api
 aiUniverse();
